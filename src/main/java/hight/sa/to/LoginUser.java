@@ -1,4 +1,4 @@
-package hight.sa.model;
+package hight.sa.to;
 
 import lombok.Data;
 
