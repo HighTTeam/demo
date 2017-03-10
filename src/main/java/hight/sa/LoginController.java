@@ -25,7 +25,7 @@ public class LoginController {
             return "login";
         }
 
-        return "index";
+        return "redirect:index";
     }
 
 
