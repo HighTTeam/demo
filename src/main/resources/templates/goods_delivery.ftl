@@ -114,7 +114,7 @@
             <div class="row">
                 <div class="col-md-3">
                 <div class="form-group">
-                    <label class="control-label" for="store-head-output">出仓负责人：</label>
+                    <label class="control-label col-md-5" for="store-head-output">出仓负责人：</label>
                     <div class="col-md-8">
                         <input class="form-control" type="text" id="store-head-output">&nbsp;&nbsp;
                     </div>
@@ -122,7 +122,7 @@
                 </div>
                 <div class="col-md-3">
                 <div class="form-group">
-                    <label class="control-label" for="store-head-input">入仓负责人：</label>
+                    <label class="control-label col-md-5" for="store-head-input">入仓负责人：</label>
                     <div class="col-md-8">
                         <input class="form-control" type="text" id="store-head-input">&nbsp;&nbsp;
                     </div>
