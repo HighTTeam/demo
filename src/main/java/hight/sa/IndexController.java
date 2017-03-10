@@ -34,9 +34,9 @@ public class IndexController {
 
         model.put("distributionId", distributionId);
 
-        model.put("storeHouses", Lists.newArrayList("1", "2", "3"));
-        model.put("vehicleStores", Lists.newArrayList("3", "2", "1"));
-        model.put("goodsList", Lists.newArrayList("3", "2", "1"));
+        model.put("storeHouses", Lists.newArrayList("公司总仓库", "遵义总仓库", "贵阳总仓库"));
+        model.put("vehicleStores", Lists.newArrayList("车辆编号000000001", "车辆编号000000002", "车辆编号000000003"));
+        model.put("goodsList", Lists.newArrayList("景田矿泉水", "百事可乐", "可口可乐", "口香糖"));
 
 
         return "goods_delivery";
