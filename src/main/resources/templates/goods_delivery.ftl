@@ -39,23 +39,23 @@
             <h1 class="page-header">商品配送</h1>
             <div class="row">
                 <div class="col-md-6">
-                    <label for="store-house">配送单号：${distributionId}</label>
+                    <label class="control-label" for="store-house">配送单号：${distributionId}</label>
                 </div>
                 <div class="col-md-3">&nbsp;</div>
                 <div class="col-md-6">&nbsp;</div>
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <label for="store-house">仓库：</label>
-                    <select id="store-house">
+                    <label class="control-label" for="store-house">仓库：</label>
+                    <select class="form-control" id="store-house">
                     <#list storeHouses as storeHouse>
                         <option>${storeHouse}</option>
                     </#list>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label for="vehicle-store">车库：</label>
-                    <select id="vehicle-store">
+                    <label class="control-label" for="vehicle-store">车库：</label>
+                    <select class="form-control" id="vehicle-store">
                     <#list vehicleStores as vehicleStore>
                         <option>${vehicleStore}</option>
                     </#list>
@@ -64,23 +64,32 @@
                 <div class="col-md-6">&nbsp;</div>
             </div>
             <div class="row">
+                <div class="col-md-3">&nbsp;</div>
+            </div>
+            <div class="row">
                 <div class="col-md-3">
-                    <label for="goods">商品：</label>
-                    <select id="goods">
+                    <label class="control-label" for="goods">商品：</label>
+                    <select class="form-control" id="goods">
                     <#list goodsList as goods>
                         <option>${goods}</option>
                     </#list>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label for="goods-number">数量：</label>
-                    <input type="number" id="goods-number">&nbsp;&nbsp;
-                    <span class="glyphicon glyphicon-plus">&nbsp;</span>
+                    <label class="control-label" for="goods-number">数量：</label>
+                    <div class="input-group">
+                        <input class="form-control" type="number" id="goods-number">
+                        <span class="input-group-btn">
+                        <button type="button" id="goodsPlus" class="btn btn-default">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                        </span>
+                    </div>
                 </div>
                 <div class="col-md-3">
                 </div>
                 <div class="col-md-1 text-right">
-                    <button type="button" class="btn btn-success btn-block">确认配送</button>
+                    <button type="button" id="confirmDelivery" style="margin-top: 25px;" class="btn btn-success btn-block">确认配送</button>
                 </div>
             </div>
             <div class="row">
@@ -92,42 +101,9 @@
                         <div class="panel-heading">已选商品</div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="table-responsive table-bordered">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>商品编码</th>
-                                        <th>商品名称</th>
-                                        <th>商品数量</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td><span class="glyphicon glyphicon-minus">&nbsp;</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <td><span class="glyphicon glyphicon-minus">&nbsp;</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                        <td><span class="glyphicon glyphicon-minus">&nbsp;</span></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <iframe id="selected-goods"
+                                    style="width: 100%; height: auto; min-height: 300px;"
+                                    frameborder="0" src="/goods_delivery_details"></iframe>
                             <!-- /.table-responsive -->
                         </div>
                         <!-- /.panel-body -->
@@ -137,17 +113,22 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <label for="store-head-output">出仓负责人：</label>
-                    <input type="text" id="store-head-output">&nbsp;&nbsp;
+                <div class="form-group">
+                    <label class="control-label" for="store-head-output">出仓负责人：</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" id="store-head-output">&nbsp;&nbsp;
+                    </div>
+                </div>
                 </div>
                 <div class="col-md-3">
-                    <label for="store-head-input">入仓负责人：</label>
-                    <input type="text" id="store-head-input">&nbsp;&nbsp;
+                <div class="form-group">
+                    <label class="control-label" for="store-head-input">入仓负责人：</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" id="store-head-input">&nbsp;&nbsp;
+                    </div>
                 </div>
-                <div class="col-md-6"></div>
+                </div>
             </div>
-
-
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -168,6 +149,13 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="../js/sb-admin-2.js"></script>
+
+<script>
+    $('#goodsPlus').on('click', function () {
+        $('#selected-goods').attr('src', $('#selected-goods').attr('src'));
+    })
+
+</script>
 
 </body>
 

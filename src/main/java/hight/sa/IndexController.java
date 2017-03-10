@@ -42,5 +42,10 @@ public class IndexController {
         return "goods_delivery";
     }
 
+    @GetMapping("/goods_delivery_details")
+    public String goodsDeliveryDetail(Map<String, Object> model){
+        return "goods_delivery_details";
+    }
+
 
 }
