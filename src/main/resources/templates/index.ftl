@@ -307,11 +307,9 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-        <div id="page-wrapper">
-            <iframe id="page-content"
+        <iframe id="page-wrapper"
                     style="width: 100%; height: 100%;"
                     frameborder="0" src="/goods_delivery"></iframe>
-        </div>
         <!-- /#page-wrapper -->
 
     </div>
