@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 import java.util.UUID;
 
@@ -18,8 +20,12 @@ public class IndexController {
     private String message = "Hello World";
 
     @GetMapping("/index")
-    public String index(Map<String, Object> model) {
-        return "index";
+    public String index(HttpSession session) {
+        if ("true".equals(session.getAttribute("isLoggedIn"))) {
+            return "index";
+        }
+
+        return "redirect:/";
     }
 
     @GetMapping("/goods_delivery")

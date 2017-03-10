@@ -4,10 +4,13 @@ import hight.sa.to.LoginUser;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * Created by neron.liu on 09/03/2017.
@@ -15,18 +18,27 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
+    @GetMapping("/")
+    public String login() {
+        return "login";
+    }
+
     @PostMapping("/doLogin")
-    public String login(
+    public String doLogin(
             @ModelAttribute("LoginUser") LoginUser loginUser,
-            Model model,
+            Map<String, Object> model,
             HttpSession session) {
+        if ("true".equals(session.getAttribute("isLoggedIn"))) {
+            return "redirect:index";
+        }
+
         if (!StringUtils.startsWith(loginUser.getEmail(), "neron")) {
-            model.addAttribute("message", "User not exist!");
+            model.put("message", "User not exist!");
             return "login";
         }
 
+        session.setAttribute("isLoggedIn", "true");
         return "redirect:index";
     }
-
 
 }
