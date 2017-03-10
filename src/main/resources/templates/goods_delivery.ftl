@@ -38,6 +38,13 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">商品配送</h1>
                         <div class="row">
+                            <div class="col-md-6">
+                                <label for="store-house">配送单号：${distributionId}</label>
+                            </div>
+                            <div class="col-md-3">&nbsp;</div>
+                            <div class="col-md-6">&nbsp;</div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-3">
                                 <label for="store-house">仓库：</label>
                                 <select id="store-house">
