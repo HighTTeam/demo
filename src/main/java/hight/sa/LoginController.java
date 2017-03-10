@@ -1,6 +1,6 @@
 package hight.sa;
 
-import hight.sa.model.LoginUser;
+import hight.sa.to.LoginUser;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,4 +1,4 @@
-package hight.sa;
+package hight.sa.repository;
 
 import hight.sa.model.StoreHouseInfo;
 import org.springframework.data.repository.PagingAndSortingRepository;
