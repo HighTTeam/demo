@@ -49,7 +49,7 @@
                     <label class="control-label" for="store-house">仓库：</label>
                     <select class="form-control" id="store-house">
                     <#list storeHouses as storeHouse>
-                        <option>${storeHouse}</option>
+                        <option value="${storeHouse.id}">${storeHouse.name}</option>
                     </#list>
                     </select>
                 </div>
@@ -57,7 +57,7 @@
                     <label class="control-label" for="vehicle-store">车库：</label>
                     <select class="form-control" id="vehicle-store">
                     <#list vehicleStores as vehicleStore>
-                        <option>${vehicleStore}</option>
+                        <option value="${vehicleStore.id}">${vehicleStore.name}</option>
                     </#list>
                     </select>
                 </div>
@@ -71,7 +71,7 @@
                     <label class="control-label" for="goods">商品：</label>
                     <select class="form-control" id="goods">
                     <#list goodsList as goods>
-                        <option>${goods}</option>
+                        <option value="${goods.id}">${goods.name}</option>
                     </#list>
                     </select>
                 </div>
