@@ -1,7 +1,10 @@
 package hight.sa;
 
+import hight.sa.model.CommodityInfo;
+import hight.sa.repository.CommodityInfoRepo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -9,8 +12,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class SaApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+    @Autowired
+    private CommodityInfoRepo commodityInfoRepo;
+
+    @Test
+    public void contextLoads() {
+    }
+
+    @Test
+    public void commodityInfoFindById() throws Exception {
+        CommodityInfo item = commodityInfoRepo.findById("0012345678");
+        System.out.println("====" + item);
+    }
+
 
 }
