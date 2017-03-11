@@ -1,5 +1,6 @@
 package hight.sa.repository;
 
+import hight.sa.config.MybatisExtendedLanguageDriver;
 import hight.sa.model.CommodityInfo;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
@@ -26,4 +27,12 @@ public interface CommodityInfoRepo {
             @Result(property = "name", column = "CommodityName", javaType = String.class, jdbcType = JdbcType.VARCHAR),
     })
     List<CommodityInfo> getSelectedList();
+
+    @Lang(MybatisExtendedLanguageDriver.class)
+    @Select("select CommodityID, CommodityName from CommodityInfo where CommodityID in (#{ids})")
+    @Results(value = {
+            @Result(id = true, property = "id", column = "CommodityID", javaType = String.class, jdbcType = JdbcType.VARCHAR),
+            @Result(property = "name", column = "CommodityName", javaType = String.class, jdbcType = JdbcType.VARCHAR),
+    })
+    List<CommodityInfo> findByIds(@Param("ids") List<String> ids);
 }

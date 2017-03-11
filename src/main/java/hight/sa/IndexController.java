@@ -1,15 +1,19 @@
 package hight.sa;
 
 import hight.sa.model.CommodityInfo;
+import hight.sa.model.DeliveryCart;
 import hight.sa.model.StoreHouseInfo;
 import hight.sa.model.VehicleStoreInfo;
 import hight.sa.repository.CommodityInfoRepo;
+import hight.sa.repository.DeliveryCartRepo;
 import hight.sa.repository.StoreHouseInfoRepo;
 import hight.sa.repository.VehicleStoreInfoRepo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -30,6 +34,9 @@ public class IndexController {
 
     @Autowired
     private CommodityInfoRepo commodityInfoRepo;
+
+    @Autowired
+    private DeliveryCartRepo deliveryCartRepo;
 
     @Value("${application.message:Hello World}")
     private String message = "Hello World";
@@ -65,9 +72,14 @@ public class IndexController {
     }
 
     @GetMapping("/goods_delivery_details")
-    public String goodsDeliveryDetail(Map<String, Object> model) {
+    public String goodsDeliveryDetail(Map<String, Object> model, @RequestParam(value = "distributionId", required = false) String distributionId) {
+
+        if (StringUtils.isNotBlank(distributionId)) {
+            List<DeliveryCart> cartList = deliveryCartRepo.getCartList(distributionId);
+            model.put("cartList", cartList);
+        }
+
         return "goods_delivery_details";
     }
-
 
 }

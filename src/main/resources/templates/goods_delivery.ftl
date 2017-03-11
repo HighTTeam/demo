@@ -78,7 +78,7 @@
                 <div class="col-md-3">
                     <label class="control-label" for="goods-number">数量：</label>
                     <div class="input-group">
-                        <input class="form-control" type="number" id="goods-number">
+                        <input class="form-control" type="number" min="1" value="1" id="goods-number">
                         <span class="input-group-btn">
                         <button type="button" id="goodsPlus" class="btn btn-default">
                             <span class="glyphicon glyphicon-plus"></span>
@@ -103,7 +103,7 @@
                         <div class="panel-body">
                             <iframe id="selected-goods"
                                     style="width: 100%; height: auto; min-height: 300px;"
-                                    frameborder="0" src="/goods_delivery_details"></iframe>
+                                    frameborder="0" src="/goods_delivery_details?distributionId=${distributionId}"></iframe>
                             <!-- /.table-responsive -->
                         </div>
                         <!-- /.panel-body -->
@@ -152,7 +152,14 @@
 
 <script>
     $('#goodsPlus').on('click', function () {
-        $('#selected-goods').attr('src', $('#selected-goods').attr('src'));
+        $.ajax({
+            url: "addCart",
+            method: "POST",
+            data: { distributionId:"${distributionId}", id: $("#goods").val(), num: $("#goods-number").val() }
+        }).done(function (data) {
+            $('#selected-goods').attr('src', $('#selected-goods').attr('src'));
+        });
+
     })
 
 </script>

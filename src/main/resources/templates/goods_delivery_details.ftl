@@ -45,27 +45,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td><span class="glyphicon glyphicon-minus">&nbsp;</span></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td><span class="glyphicon glyphicon-minus">&nbsp;</span></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td><span class="glyphicon glyphicon-minus">&nbsp;</span></td>
-        </tr>
+        <#if cartList??>
+            <#list cartList as cart>
+            <tr>
+                <td>${cart_index + 1}</td>
+                <td>${cart.commodityId}</td>
+                <td>${cart.commodityName}</td>
+                <td>${cart.num}</td>
+                <td><span id="cartGoods_${cart.id}" onclick="delCart(${cart.id})" class="glyphicon glyphicon-minus">&nbsp;</span></td>
+            </tr>
+            </#list>
+        </#if>
         </tbody>
     </table>
 </div>
@@ -81,6 +71,20 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="../js/sb-admin-2.js"></script>
+
+<script>
+
+    function delCart(cartId) {
+        $.ajax({
+            url: "delCart",
+            method: "POST",
+            data: { cartId: cartId }
+        }).done(function (data) {
+            window.location.reload();
+        });
+    }
+
+</script>
 
 </body>
 
