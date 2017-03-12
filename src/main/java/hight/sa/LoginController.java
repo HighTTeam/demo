@@ -30,7 +30,7 @@ public class LoginController {
             return "redirect:index";
         }
 
-        if (!StringUtils.startsWith(loginUser.getEmail(), "neron") ||
+        if (!StringUtils.startsWith(loginUser.getEmail(), "neron") &&
                 !StringUtils.startsWith(loginUser.getEmail(), "yxm")) {
             model.put("message", "User not exist!");
             return "login";

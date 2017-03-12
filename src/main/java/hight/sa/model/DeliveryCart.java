@@ -13,6 +13,9 @@ public class DeliveryCart {
     private Long id;
     private String distributionId;
     private String logicStoreId;
+    private String logicStoreName;
+    private String vehicleStoreId;
+    private String vehicleStoreName;
     private String commodityId;
     private String commodityName;
     private Integer num;

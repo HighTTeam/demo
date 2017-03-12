@@ -13,9 +13,10 @@ import java.util.List;
 @Mapper
 public interface DeliveryCartRepo {
 
-    @Insert("insert into DeliveryCart(DistributionID, LogicStoreID, CommodityID, Num) values(#{distributionId}, #{logicStoreId}, #{commodityId}, #{num})")
+    @Insert("insert into DeliveryCart(DistributionID, LogicStoreID, VehicleStoreID, CommodityID, Num) values(#{distributionId}, #{logicStoreId}, #{vehicleStoreId}, #{commodityId}, #{num})")
     void addCart(@Param("distributionId") String distributionId,
                  @Param("logicStoreId") String logicStoreId,
+                 @Param("vehicleStoreId") String vehicleStoreId,
                  @Param("commodityId") String commodityId,
                  @Param("num") Integer num);
 
@@ -36,13 +37,16 @@ public interface DeliveryCartRepo {
     DeliveryCart findTheSameCommodity(@Param("distributionId") String distributionId,
                                       @Param("commodityId") String commodityId);
 
-    @Select("select t.CartID, t.DistributionID, t.CommodityID, t.Num, t.LogicStoreID, c.CommodityName from DeliveryCart t left join CommodityInfo c on t.CommodityID = c.CommodityID where DistributionID = #{distributionId}")
+    @Select("select t.CartID, t.DistributionID, t.CommodityID, t.Num, t.LogicStoreID, h.StoreHouseName, t.VehicleStoreID, v.VehicleStoreName, c.CommodityName from DeliveryCart t left join CommodityInfo c on t.CommodityID = c.CommodityID left join StoreHouseInfo h on h.StoreHouseID = t.LogicStoreID left join VehicleStoreInfo v on v.VehicleStoreID = t.VehicleStoreID where DistributionID = #{distributionId}")
     @Results(value = {
             @Result(id = true, property = "id", column = "CartID", javaType = Long.class, jdbcType = JdbcType.BIGINT),
             @Result(property = "distributionId", column = "DistributionID", javaType = String.class, jdbcType = JdbcType.VARCHAR),
             @Result(property = "commodityId", column = "CommodityID", javaType = String.class, jdbcType = JdbcType.VARCHAR),
             @Result(property = "commodityName", column = "CommodityName", javaType = String.class, jdbcType = JdbcType.VARCHAR),
             @Result(property = "logicStoreId", column = "LogicStoreID", javaType = String.class, jdbcType = JdbcType.VARCHAR),
+            @Result(property = "logicStoreName", column = "StoreHouseName", javaType = String.class, jdbcType = JdbcType.VARCHAR),
+            @Result(property = "vehicleStoreId", column = "VehicleStoreID", javaType = String.class, jdbcType = JdbcType.VARCHAR),
+            @Result(property = "vehicleStoreName", column = "VehicleStoreName", javaType = String.class, jdbcType = JdbcType.VARCHAR),
             @Result(property = "num", column = "Num", javaType = Integer.class, jdbcType = JdbcType.INTEGER),
             @Result(property = "crtTime", column = "CrtTime", javaType = Date.class, jdbcType = JdbcType.TIMESTAMP),
     })

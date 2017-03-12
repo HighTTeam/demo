@@ -186,6 +186,7 @@
             data: {
                 distributionId: "${distributionId}",
                 logicStoreId: $('#storeHouseId').val(),
+                vehicleStoreId: $('#vehicleStoreId').val(),
                 id: $("#goods").val(),
                 num: $("#goods-number").val()
             }
@@ -208,7 +209,6 @@
                 method: "POST",
                 data: {
                     distributionId: "${distributionId}",
-                    vehicleStoreId: $('#vehicleStoreId').val(),
                     stockInName: $("#stockInName").val(),
                     stockOutName: $("#stockOutName").val()
                 }
