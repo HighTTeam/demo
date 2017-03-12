@@ -38,97 +38,101 @@
         <div class="col-lg-12">
             <h1 class="page-header">商品配送</h1>
             <form id="delivery-form" action="/delivery_confirm" method="POST">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="control-label" for="distributionId">配送单号：</label>
-                    <input type="text" class="form-control" id="distributiond" name="distributionId" value="${distributionId}" readonly>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label" for="distributionId">配送单号：</label>
+                        <input type="text" class="form-control" id="distributionId" name="distributionId"
+                               value="${distributionId}" readonly>
+                    </div>
+                    <div class="col-md-6">&nbsp;</div>
                 </div>
-                <div class="col-md-6">&nbsp;</div>
-            </div>
-                <div class="row"><div class="col-md-3">&nbsp;</div></div>
-            <div class="row">
-                <div class="col-md-3">
-                    <label class="control-label" for="storeHouseId">配送点：</label>
-                    <select class="form-control" id="storeHouseId">
-                    <#list storeHouses as storeHouse>
-                        <option value="${storeHouse.id}">${storeHouse.name}</option>
-                    </#list>
-                    </select>
+                <div class="row">
+                    <div class="col-md-3">&nbsp;</div>
                 </div>
-                <div class="col-md-3">
-                    <label class="control-label" for="vehicleStoreId">车载便利店：</label>
-                    <select class="form-control" id="vehicleStoreId" name="vehicleStoreId">
-                    <#list vehicleStores as vehicleStore>
-                        <option value="${vehicleStore.id}">${vehicleStore.name}</option>
-                    </#list>
-                    </select>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="control-label" for="storeHouseId">配送点：</label>
+                        <select class="form-control" id="storeHouseId">
+                        <#list storeHouses as storeHouse>
+                            <option value="${storeHouse.id}">${storeHouse.name}</option>
+                        </#list>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label" for="vehicleStoreId">车载便利店：</label>
+                        <select class="form-control" id="vehicleStoreId" name="vehicleStoreId">
+                        <#list vehicleStores as vehicleStore>
+                            <option value="${vehicleStore.id}">${vehicleStore.name}</option>
+                        </#list>
+                        </select>
+                    </div>
+                    <div class="col-md-6">&nbsp;</div>
                 </div>
-                <div class="col-md-6">&nbsp;</div>
-            </div>
-            <div class="row"><div class="col-md-3">&nbsp;</div></div>
-            <div class="row">
-                <div class="col-md-3">
-                    <label class="control-label" for="goods">商品：</label>
-                    <select class="form-control" id="goods">
-                    <#list goodsList as goods>
-                        <option value="${goods.id}">${goods.name}</option>
-                    </#list>
-                    </select>
+                <div class="row">
+                    <div class="col-md-3">&nbsp;</div>
                 </div>
-                <div class="col-md-3">
-                    <label class="control-label" for="goods-number">数量：</label>
-                    <div class="input-group">
-                        <input class="form-control" type="number" min="1" value="1" id="goods-number">
-                        <span class="input-group-btn">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="control-label" for="stockOutName">出仓负责人：</label>
+                        <input class="form-control" id="stockOutName" name="stockOutName" type="text">&nbsp;&nbsp;
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label" for="stockInName">入仓负责人：</label>
+                        <input class="form-control" id="stockInName" name="stockInName" type="text">&nbsp;&nbsp;
+                    </div>
+                    <div class="col-md-6"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="control-label" for="goods">商品：</label>
+                        <select class="form-control" id="goods">
+                        <#list goodsList as goods>
+                            <option value="${goods.id}">${goods.name}</option>
+                        </#list>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label" for="goods-number">数量：</label>
+                        <div class="input-group">
+                            <input class="form-control" type="number" min="1" value="1" id="goods-number">
+                            <span class="input-group-btn">
                         <button type="button" id="goodsPlus" class="btn btn-default">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                         </span>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-1 text-right">
-                    <button type="submit" id="confirm-delivery" style="margin-top: 25px;" class="btn btn-success btn-block">确认配送</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">&nbsp;</div>
-            </div>
-            <div class="row">
-                <div class="col-md-10">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">已选商品</div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <iframe id="selected-goods"
-                                    style="width: 100%; height: auto; min-height: 300px;"
-                                    frameborder="0" src="/delivery_details?distributionId=${distributionId}"></iframe>
-                            <!-- /.table-responsive -->
                         </div>
-                        <!-- /.panel-body -->
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <button type="button" id="confirm-delivery" style="margin-top: 25px;"
+                                class="btn btn-success btn-block">确认配送
+                        </button>
                     </div>
                 </div>
-                <div class="col-md-4">&nbsp;</div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label col-md-5" for="store-head-output">出仓负责人：</label>
-                    <div class="col-md-8">
-                        <input class="form-control" id="stockOutName" name="stockOutName" type="text" id="store-head-output">&nbsp;&nbsp;
+                <div class="row">
+                    <div class="col-md-3">&nbsp;</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">已选商品</div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <iframe id="selected-goods"
+                                        style="width: 100%; height: auto; min-height: 300px;"
+                                        frameborder="0"
+                                        src="/delivery_details?distributionId=${distributionId}"></iframe>
+                                <!-- /.table-responsive -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
                     </div>
+                    <div class="col-md-4">&nbsp;</div>
                 </div>
-                </div>
-                <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label col-md-5" for="store-head-input">入仓负责人：</label>
-                    <div class="col-md-8">
-                        <input class="form-control" id="stockInName" name="stockInName" type="text" id="store-head-input">&nbsp;&nbsp;
-                    </div>
-                </div>
-                </div>
-            </div>
             </form>
         </div>
         <!-- /.col-lg-12 -->
@@ -138,6 +142,28 @@
 <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                配送单${distributionId}创建成功！
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">打印配送单</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- jQuery -->
 <script src="../vendor/jquery/jquery.min.js"></script>
@@ -156,11 +182,44 @@
         $.ajax({
             url: "addCart",
             method: "POST",
-            data: { distributionId:"${distributionId}", logicStoreId: $('#storeHouseId').val(), id: $("#goods").val(), num: $("#goods-number").val() }
+            data: {
+                distributionId: "${distributionId}",
+                logicStoreId: $('#storeHouseId').val(),
+                id: $("#goods").val(),
+                num: $("#goods-number").val()
+            }
         }).done(function (data) {
             $('#selected-goods').attr('src', $('#selected-goods').attr('src'));
         });
 
+    });
+
+    $('#confirm-delivery').on('click', function () {
+        if ($.isEmptyObject($("#stockOutName").val())) {
+            $("#stockOutName").focus();
+            alert("请输入出仓负责人");
+        } else if ($.isEmptyObject($("#stockInName").val())) {
+            $("#stockInName").focus();
+            alert("请输入入仓负责人");
+        } else {
+            $.ajax({
+                url: "deliveryConfirm",
+                method: "POST",
+                data: {
+                    distributionId: "${distributionId}",
+                    vehicleStoreId: $('#vehicleStoreId').val(),
+                    stockInName: $("#stockInName").val(),
+                    stockOutName: $("#stockOutName").val()
+                }
+            }).done(function (data) {
+                $('#confirmModal').modal('show');
+            });
+        }
+
+    });
+
+    $('#confirmModal').on('hidden.bs.modal', function () {
+        window.location.reload();
     });
 
 </script>

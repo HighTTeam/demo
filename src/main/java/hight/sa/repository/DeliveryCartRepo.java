@@ -36,12 +36,13 @@ public interface DeliveryCartRepo {
     DeliveryCart findTheSameCommodity(@Param("distributionId") String distributionId,
                                       @Param("commodityId") String commodityId);
 
-    @Select("select t.CartID, t.DistributionID, t.CommodityID, t.Num, c.CommodityName from DeliveryCart t left join CommodityInfo c on t.CommodityID = c.CommodityID where DistributionID = #{distributionId}")
+    @Select("select t.CartID, t.DistributionID, t.CommodityID, t.Num, t.LogicStoreID, c.CommodityName from DeliveryCart t left join CommodityInfo c on t.CommodityID = c.CommodityID where DistributionID = #{distributionId}")
     @Results(value = {
             @Result(id = true, property = "id", column = "CartID", javaType = Long.class, jdbcType = JdbcType.BIGINT),
             @Result(property = "distributionId", column = "DistributionID", javaType = String.class, jdbcType = JdbcType.VARCHAR),
             @Result(property = "commodityId", column = "CommodityID", javaType = String.class, jdbcType = JdbcType.VARCHAR),
             @Result(property = "commodityName", column = "CommodityName", javaType = String.class, jdbcType = JdbcType.VARCHAR),
+            @Result(property = "logicStoreId", column = "LogicStoreID", javaType = String.class, jdbcType = JdbcType.VARCHAR),
             @Result(property = "num", column = "Num", javaType = Integer.class, jdbcType = JdbcType.INTEGER),
             @Result(property = "crtTime", column = "CrtTime", javaType = Date.class, jdbcType = JdbcType.TIMESTAMP),
     })
