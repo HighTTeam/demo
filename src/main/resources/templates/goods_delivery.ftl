@@ -31,7 +31,7 @@
     <![endif]-->
 </head>
 
-<body>
+<body style="background-color: rgba(205, 220, 57, 0.5);">
 <!-- Page Content -->
 <div class="container-fluid">
     <div class="row">
