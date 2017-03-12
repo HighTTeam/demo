@@ -34,13 +34,13 @@
 <body>
 <!-- Page Content -->
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" id="print_ele">
         <div class="col-lg-12">
             <h1 class="page-header">商品配送</h1>
             <form id="delivery-form" action="/delivery_confirm" method="POST">
                 <div class="row">
                     <div class="col-md-6">
-                        <label class="control-label" for="distributionId">配送单号：</label>
+                        <label class="control-label" for="distributionId">配送单号：<div hidden>${distributionId}</div></label>
                         <input type="text" class="form-control" id="distributionId" name="distributionId"
                                value="${distributionId}" readonly>
                     </div>
@@ -85,7 +85,7 @@
                 <div class="row">
                     <div class="col-md-3"></div>
                 </div>
-                <div class="row">
+                <div class="row no-print">
                     <div class="col-md-3">
                         <label class="control-label" for="goods">商品：</label>
                         <select class="form-control" id="goods">
@@ -158,7 +158,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">打印配送单</button>
+                <button type="button" class="btn btn-primary" id="print-delivery">打印配送单</button>
             </div>
         </div>
     </div>
@@ -176,6 +176,7 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="../js/sb-admin-2.js"></script>
+<script src="../js/jQuery.print.js"></script>
 
 <script>
     $('#goodsPlus').on('click', function () {
@@ -220,6 +221,10 @@
 
     $('#confirmModal').on('hidden.bs.modal', function () {
         window.location.reload();
+    });
+
+    $('#print-delivery').on('click', function () {
+        $("#print_ele").print();
     });
 
 </script>
