@@ -309,7 +309,7 @@
 
         <iframe id="page-wrapper"
                     style="width: 100%; height: 100%;"
-                    frameborder="0" src="/goods_delivery"></iframe>
+                    frameborder="0" src="/delivery"></iframe>
         <!-- /#page-wrapper -->
 
     </div>

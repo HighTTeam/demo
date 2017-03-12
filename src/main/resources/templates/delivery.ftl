@@ -37,25 +37,27 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">商品配送</h1>
+            <form id="delivery-form" action="/confirm_delivery" method="POST">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label" for="store-house">配送单号：${distributionId}</label>
+                    <label class="control-label" for="distributionId">配送单号：</label>
+                    <input type="text" class="form-control" id="distribution-id" value="${distributionId}" readonly>
                 </div>
-                <div class="col-md-3">&nbsp;</div>
                 <div class="col-md-6">&nbsp;</div>
             </div>
+                <div class="row"><div class="col-md-3">&nbsp;</div></div>
             <div class="row">
                 <div class="col-md-3">
-                    <label class="control-label" for="store-house">配送点：</label>
-                    <select class="form-control" id="store-house">
+                    <label class="control-label" for="storeHouseId">配送点：</label>
+                    <select class="form-control" id="storeHouseId">
                     <#list storeHouses as storeHouse>
                         <option value="${storeHouse.id}">${storeHouse.name}</option>
                     </#list>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label class="control-label" for="vehicle-store">车载便利店：</label>
-                    <select class="form-control" id="vehicle-store">
+                    <label class="control-label" for="vehicleStoreId">车载便利店：</label>
+                    <select class="form-control" id="vehicleStoreId">
                     <#list vehicleStores as vehicleStore>
                         <option value="${vehicleStore.id}">${vehicleStore.name}</option>
                     </#list>
@@ -63,9 +65,7 @@
                 </div>
                 <div class="col-md-6">&nbsp;</div>
             </div>
-            <div class="row">
-                <div class="col-md-3">&nbsp;</div>
-            </div>
+            <div class="row"><div class="col-md-3">&nbsp;</div></div>
             <div class="row">
                 <div class="col-md-3">
                     <label class="control-label" for="goods">商品：</label>
@@ -89,7 +89,7 @@
                 <div class="col-md-3">
                 </div>
                 <div class="col-md-1 text-right">
-                    <button type="button" id="confirmDelivery" style="margin-top: 25px;" class="btn btn-success btn-block">确认配送</button>
+                    <button type="submit" id="confirm-delivery" style="margin-top: 25px;" class="btn btn-success btn-block">确认配送</button>
                 </div>
             </div>
             <div class="row">
@@ -103,7 +103,7 @@
                         <div class="panel-body">
                             <iframe id="selected-goods"
                                     style="width: 100%; height: auto; min-height: 300px;"
-                                    frameborder="0" src="/goods_delivery_details?distributionId=${distributionId}"></iframe>
+                                    frameborder="0" src="/delivery_details?distributionId=${distributionId}"></iframe>
                             <!-- /.table-responsive -->
                         </div>
                         <!-- /.panel-body -->
@@ -116,7 +116,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-5" for="store-head-output">出仓负责人：</label>
                     <div class="col-md-8">
-                        <input class="form-control" type="text" id="store-head-output">&nbsp;&nbsp;
+                        <input class="form-control" id="stockOutName" type="text" id="store-head-output">&nbsp;&nbsp;
                     </div>
                 </div>
                 </div>
@@ -124,11 +124,12 @@
                 <div class="form-group">
                     <label class="control-label col-md-5" for="store-head-input">入仓负责人：</label>
                     <div class="col-md-8">
-                        <input class="form-control" type="text" id="store-head-input">&nbsp;&nbsp;
+                        <input class="form-control" id="stockInName" type="text" id="store-head-input">&nbsp;&nbsp;
                     </div>
                 </div>
                 </div>
             </div>
+            </form>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -155,12 +156,12 @@
         $.ajax({
             url: "addCart",
             method: "POST",
-            data: { distributionId:"${distributionId}", id: $("#goods").val(), num: $("#goods-number").val() }
+            data: { distributionId:"${distributionId}", logicStoreId: $('#storeHouseId').val(), id: $("#goods").val(), num: $("#goods-number").val() }
         }).done(function (data) {
             $('#selected-goods').attr('src', $('#selected-goods').attr('src'));
         });
 
-    })
+    });
 
 </script>
 

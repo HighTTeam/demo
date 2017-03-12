@@ -13,8 +13,9 @@ import java.util.List;
 @Mapper
 public interface DeliveryCartRepo {
 
-    @Insert("insert into DeliveryCart(DistributionID, CommodityID, Num) values(#{distributionId}, #{commodityId}, #{num})")
+    @Insert("insert into DeliveryCart(DistributionID, LogicStoreID, CommodityID, Num) values(#{distributionId}, #{logicStoreId}, #{commodityId}, #{num})")
     void addCart(@Param("distributionId") String distributionId,
+                 @Param("logicStoreId") String logicStoreId,
                  @Param("commodityId") String commodityId,
                  @Param("num") Integer num);
 

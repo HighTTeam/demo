@@ -1,26 +1,19 @@
 package hight.sa;
 
-import hight.sa.model.CommodityInfo;
-import hight.sa.model.DeliveryCart;
-import hight.sa.model.StoreHouseInfo;
-import hight.sa.model.VehicleStoreInfo;
-import hight.sa.repository.CommodityInfoRepo;
-import hight.sa.repository.DeliveryCartRepo;
-import hight.sa.repository.StoreHouseInfoRepo;
-import hight.sa.repository.VehicleStoreInfoRepo;
+import hight.sa.model.*;
+import hight.sa.repository.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by neron.liu on 09/03/2017.
@@ -40,6 +33,12 @@ public class IndexController {
     @Autowired
     private DeliveryCartRepo deliveryCartRepo;
 
+    @Autowired
+    private DeliveryRepo deliveryRepo;
+
+    @Autowired
+    private InventoryInfoRepo inventoryInfoRepo;
+
     @Value("${application.message:Hello World}")
     private String message = "Hello World";
 
@@ -52,8 +51,8 @@ public class IndexController {
         return "redirect:/";
     }
 
-    @GetMapping("/goods_delivery")
-    public String goodsDelivery(Map<String, Object> model) {
+    @GetMapping("/delivery")
+    public String getDelivery(Map<String, Object> model) {
         // 配送单号
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String createTime = sdf.format(new Date());
@@ -72,18 +71,49 @@ public class IndexController {
         List<CommodityInfo> commodityInfoList = commodityInfoRepo.getSelectedList();
         model.put("goodsList", commodityInfoList);
 
-        return "goods_delivery";
+        return "delivery";
     }
 
-    @GetMapping("/goods_delivery_details")
-    public String goodsDeliveryDetail(Map<String, Object> model, @RequestParam(value = "distributionId", required = false) String distributionId) {
+    @GetMapping("/delivery_details")
+    public String getDeliveryDetail(Map<String, Object> model, @RequestParam(value = "distributionId", required = false) String distributionId) {
 
         if (StringUtils.isNotBlank(distributionId)) {
             List<DeliveryCart> cartList = deliveryCartRepo.getCartList(distributionId);
             model.put("cartList", cartList);
         }
 
-        return "goods_delivery_details";
+        return "delivery_details";
+    }
+
+    @PostMapping("/delivery_confirm")
+    public String confirmDelivery(Map<String, Object> model,
+                                  @RequestParam(value = "distributionId") String distributionId,
+                                  @RequestParam(value = "vehicleStoreId") String vehicleStoreId,
+                                  @RequestParam(value = "stockInName") String stockInName,
+                                  @RequestParam(value = "stockOutName") String stockOutName) {
+        List<DeliveryCart> cart = Optional.ofNullable(deliveryCartRepo.getCartList(distributionId)).orElse(Collections.emptyList());
+
+        List<Delivery> deliveries = cart.stream().map(item -> {
+            Delivery delivery = new Delivery();
+            delivery.setDistributionId(distributionId);
+            delivery.setVehicleStoreId(vehicleStoreId);
+            delivery.setStoreHouseId(item.getLogicStoreId());
+            delivery.setCommodityId(item.getCommodityId());
+            delivery.setCommodityCount(item.getNum());
+            delivery.setStockInName(stockInName);
+            delivery.setStockOutName(stockOutName);
+
+            return delivery;
+        }).map(item -> {
+            deliveryRepo.create(item);
+
+            return item;
+        }).collect(Collectors.toList());
+
+        model.put("distributionId", distributionId);
+        model.put("deliveries", deliveries);
+
+        return "delivery_result";
     }
 
 }

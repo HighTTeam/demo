@@ -12,6 +12,7 @@ public class DeliveryCart {
 
     private Long id;
     private String distributionId;
+    private String logicStoreId;
     private String commodityId;
     private String commodityName;
     private Integer num;
