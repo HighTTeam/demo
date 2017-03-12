@@ -31,7 +31,7 @@
     <![endif]-->
 </head>
 
-<body style="background-color: rgba(205, 220, 57, 0.5);">
+<body>
 <!-- Page Content -->
 <div class="container-fluid">
     <div class="row">
@@ -46,7 +46,7 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <label class="control-label" for="store-house">仓库：</label>
+                    <label class="control-label" for="store-house">配送点：</label>
                     <select class="form-control" id="store-house">
                     <#list storeHouses as storeHouse>
                         <option value="${storeHouse.id}">${storeHouse.name}</option>
@@ -54,7 +54,7 @@
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label class="control-label" for="vehicle-store">车库：</label>
+                    <label class="control-label" for="vehicle-store">车载便利店：</label>
                     <select class="form-control" id="vehicle-store">
                     <#list vehicleStores as vehicleStore>
                         <option value="${vehicleStore.id}">${vehicleStore.name}</option>

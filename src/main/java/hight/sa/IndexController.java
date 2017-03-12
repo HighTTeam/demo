@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -53,7 +55,9 @@ public class IndexController {
     @GetMapping("/goods_delivery")
     public String goodsDelivery(Map<String, Object> model) {
         // 配送单号
-        String distributionId = UUID.randomUUID().toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String createTime = sdf.format(new Date());
+        String distributionId = UUID.randomUUID().toString().concat("-").concat(createTime);
         model.put("distributionId", distributionId);
 
         // 仓库
