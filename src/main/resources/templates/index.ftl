@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>车载便利店管理系统</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +48,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.ftl">SB Admin v2.0</a>
+                <a class="navbar-brand" href="index.ftl">车载便利店管理系统</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -295,7 +295,7 @@
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> 平板新界面</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> 移动便利店配置</a>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> 车载便利店配置</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> 商品配送</a>
