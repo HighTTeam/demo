@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface DeliveryRepo {
 
     @Insert("insert into Delivery(" +
-            "DistributionID, StoreHouseID, VehicleStoreID, CommodityID, CommodityCount, StockInName, StoreOutName)" +
+            "DistributionID, StoreHouseID, VehicleStoreID, CommodityID, CommodityCount, StockInName, StockOutName)" +
             "values(#{distributionId}, #{storeHouseId}, #{vehicleStoreId}, #{commodityId}, #{commodityCount}, #{stockInName}, #{stockOutName})")
     public int create(Delivery delivery);
 

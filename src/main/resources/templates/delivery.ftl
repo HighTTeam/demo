@@ -37,11 +37,11 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">商品配送</h1>
-            <form id="delivery-form" action="/confirm_delivery" method="POST">
+            <form id="delivery-form" action="/delivery_confirm" method="POST">
             <div class="row">
                 <div class="col-md-6">
                     <label class="control-label" for="distributionId">配送单号：</label>
-                    <input type="text" class="form-control" id="distribution-id" value="${distributionId}" readonly>
+                    <input type="text" class="form-control" id="distributiond" name="distributionId" value="${distributionId}" readonly>
                 </div>
                 <div class="col-md-6">&nbsp;</div>
             </div>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-md-3">
                     <label class="control-label" for="vehicleStoreId">车载便利店：</label>
-                    <select class="form-control" id="vehicleStoreId">
+                    <select class="form-control" id="vehicleStoreId" name="vehicleStoreId">
                     <#list vehicleStores as vehicleStore>
                         <option value="${vehicleStore.id}">${vehicleStore.name}</option>
                     </#list>
@@ -116,7 +116,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-5" for="store-head-output">出仓负责人：</label>
                     <div class="col-md-8">
-                        <input class="form-control" id="stockOutName" type="text" id="store-head-output">&nbsp;&nbsp;
+                        <input class="form-control" id="stockOutName" name="stockOutName" type="text" id="store-head-output">&nbsp;&nbsp;
                     </div>
                 </div>
                 </div>
@@ -124,7 +124,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-5" for="store-head-input">入仓负责人：</label>
                     <div class="col-md-8">
-                        <input class="form-control" id="stockInName" type="text" id="store-head-input">&nbsp;&nbsp;
+                        <input class="form-control" id="stockInName" name="stockInName" type="text" id="store-head-input">&nbsp;&nbsp;
                     </div>
                 </div>
                 </div>
