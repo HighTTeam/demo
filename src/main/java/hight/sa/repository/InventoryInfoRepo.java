@@ -19,12 +19,20 @@ public interface InventoryInfoRepo {
             @Result(property = "commodityCount", column = "CommodityCount", javaType = Integer.class, jdbcType = JdbcType.INTEGER),
             @Result(property = "updateTime", column = "InventoryUpdateTm", javaType = Date.class, jdbcType = JdbcType.TIMESTAMP),
     })
-    public InventoryInfo findByPk(
+    InventoryInfo findByPk(
             @Param("logicStoreId") String logicStoreId,
             @Param("commodityId") String commodityId);
 
     @Update("update InventoryInfo set CommodityCount = CommodityCount - #{number} " +
             "where LogicStoreID = #{logicStoreId} and CommodityID = #{commodityId}")
-    public int reduceCommodityCount(String logicStoreId, String commodityId, int number);
+    int reduceCommodityCount(@Param("logicStoreId")String logicStoreId, @Param("commodityId")String commodityId, @Param("number")int number);
+
+    @Update("update InventoryInfo set CommodityCount = CommodityCount + #{number} " +
+            "where LogicStoreID = #{logicStoreId} and CommodityID = #{commodityId}")
+    int increaseCommodityCountByUpdate(@Param("logicStoreId")String logicStoreId, @Param("commodityId")String commodityId, @Param("number")int number);
+
+    @Insert("insert into InventoryInfo(CommodityCount, LogicStoreID, CommodityID) values(#{number}, #{logicStoreId}, #{commodityId})")
+    int increaseCommodityCountByInsert(@Param("logicStoreId")String logicStoreId, @Param("commodityId")String commodityId, @Param("number")int number);
+
 
 }

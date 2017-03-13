@@ -31,7 +31,8 @@ public class LoginController {
         }
 
         if (!StringUtils.startsWith(loginUser.getEmail(), "neron") &&
-                !StringUtils.startsWith(loginUser.getEmail(), "yxm")) {
+                !StringUtils.startsWith(loginUser.getEmail(), "yxm") &&
+                !StringUtils.startsWith(loginUser.getEmail(), "admin")) {
             model.put("message", "User not exist!");
             return "login";
         }

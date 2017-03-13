@@ -93,7 +93,17 @@ public class AjaxController {
         }).map(item -> {
             distributionDetailInfoRepo.create(item);
 
-            inventoryInfoRepo.reduceCommodityCount(item.getDistributionId(), item.getCommodityId(), item.getCommodityCount());
+            InventoryInfo outputInventory = inventoryInfoRepo.findByPk(item.getLogicStoreIdOutput(), item.getCommodityId());
+            InventoryInfo inputInventory = inventoryInfoRepo.findByPk(item.getLogicStoreIdInput(), item.getCommodityId());
+
+            if(outputInventory != null){
+                inventoryInfoRepo.reduceCommodityCount(item.getLogicStoreIdOutput(), item.getCommodityId(), item.getCommodityCount());
+            }
+            if(inputInventory != null){
+                inventoryInfoRepo.increaseCommodityCountByUpdate(item.getLogicStoreIdInput(), item.getCommodityId(), item.getCommodityCount());
+            }else{
+                inventoryInfoRepo.increaseCommodityCountByInsert(item.getLogicStoreIdInput(), item.getCommodityId(), item.getCommodityCount());
+            }
 
             return item;
         }).collect(Collectors.toList());
