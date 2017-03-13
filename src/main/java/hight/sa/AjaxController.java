@@ -92,6 +92,9 @@ public class AjaxController {
             return info;
         }).map(item -> {
             distributionDetailInfoRepo.create(item);
+
+            inventoryInfoRepo.reduceCommodityCount(item.getDistributionId(), item.getCommodityId(), item.getCommodityCount());
+
             return item;
         }).collect(Collectors.toList());
         return ResponseEntity.ok().build();
