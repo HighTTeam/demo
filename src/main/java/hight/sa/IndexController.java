@@ -2,7 +2,9 @@ package hight.sa;
 
 import hight.sa.model.*;
 import hight.sa.repository.*;
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -51,12 +53,35 @@ public class IndexController {
         return "redirect:/";
     }
 
+    private String uniqueId() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String createTime = sdf.format(new Date());
+
+        String createTimeMs = String.valueOf(System.currentTimeMillis());
+        return createTime + createTimeMs.substring(createTimeMs.length() - 5, createTime.length() - 1);
+    }
+
+    @GetMapping("/godown_entry")
+    public String getGodownEntry(Map<String, Object> model) {
+        String godownEntryId = uniqueId();
+
+        model.put("distributionId", godownEntryId);
+
+        // 仓库
+        List<StoreHouseInfo> storeHouseInfoList = storeHouseInfoRepo.getSelectedList();
+        model.put("storeHouses", storeHouseInfoList);
+
+        // 商品
+        List<CommodityInfo> commodityInfoList = commodityInfoRepo.getSelectedList();
+        model.put("goodsList", commodityInfoList);
+
+        return "godown_entry";
+    }
+
     @GetMapping("/delivery")
     public String getDelivery(Map<String, Object> model) {
         // 配送单号
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String createTime = sdf.format(new Date());
-        String distributionId = UUID.randomUUID().toString().concat("-").concat(createTime);
+        String distributionId = uniqueId();
         model.put("distributionId", distributionId);
 
         // 仓库

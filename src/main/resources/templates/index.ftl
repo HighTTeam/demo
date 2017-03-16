@@ -298,7 +298,10 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> 车载便利店配置</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> 商品配送</a>
+                            <a href="#" onclick="go2('/delivery')"><i class="fa fa-files-o fa-fw"></i> 商品配送</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="go2('/godown_entry')"><i class="fa fa-files-o fa-fw"></i> 商品入库</a>
                         </li>
                     </ul>
                 </div>
@@ -334,5 +337,10 @@
     <script src="../js/jQuery.print.js"></script>
 
 </body>
+<script>
+    function go2(target){
+        $('#page-wrapper').attr('src', target)
+    }
+</script>
 
 </html>

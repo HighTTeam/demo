@@ -3,10 +3,8 @@ package hight.sa;
 import hight.sa.model.DeliveryCart;
 import hight.sa.model.DistributionDetailInfo;
 import hight.sa.model.InventoryInfo;
-import hight.sa.repository.DeliveryCartRepo;
-import hight.sa.repository.DeliveryRepo;
-import hight.sa.repository.DistributionDetailInfoRepo;
-import hight.sa.repository.InventoryInfoRepo;
+import hight.sa.model.StorageDetailInfo;
+import hight.sa.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by gibson.luo on 2017/3/12.
@@ -37,6 +37,9 @@ public class AjaxController {
 
     @Autowired
     private DistributionDetailInfoRepo distributionDetailInfoRepo;
+
+    @Autowired
+    private StorageDetailInfoRepo storageDetailInfoRepo;
 
     @PostMapping("/addCart")
     public ResponseEntity<?> addCart(@RequestParam(value = "distributionId") String distributionId,
@@ -96,17 +99,48 @@ public class AjaxController {
             InventoryInfo outputInventory = inventoryInfoRepo.findByPk(item.getLogicStoreIdOutput(), item.getCommodityId());
             InventoryInfo inputInventory = inventoryInfoRepo.findByPk(item.getLogicStoreIdInput(), item.getCommodityId());
 
-            if(outputInventory != null){
+            if (outputInventory != null) {
                 inventoryInfoRepo.reduceCommodityCount(item.getLogicStoreIdOutput(), item.getCommodityId(), item.getCommodityCount());
             }
-            if(inputInventory != null){
+            if (inputInventory != null) {
                 inventoryInfoRepo.increaseCommodityCountByUpdate(item.getLogicStoreIdInput(), item.getCommodityId(), item.getCommodityCount());
-            }else{
+            } else {
                 inventoryInfoRepo.increaseCommodityCountByInsert(item.getLogicStoreIdInput(), item.getCommodityId(), item.getCommodityCount());
             }
 
             return item;
-        }).collect(Collectors.toList());
+        }).collect(toList());
+        return ResponseEntity.ok().build();
+    }
+
+
+    @PostMapping("/godownEntryConfirm")
+    public ResponseEntity<String> confirmGodownEntry(Map<String, Object> model,
+                                                     @RequestParam(value = "distributionId") String godownEntryId,
+                                                     @RequestParam(value = "wholesalerHead") String wholesalerHead,
+                                                     @RequestParam(value = "motorcadeHead") String motorcadeHead,
+                                                     @RequestParam(value = "storeHeadInput") String storeHeadInput) {
+        List<DeliveryCart> cart = Optional.ofNullable(deliveryCartRepo.getCartList(godownEntryId)).orElse(Collections.emptyList());
+
+        List<StorageDetailInfo> infoList = cart.stream().map(item -> {
+            StorageDetailInfo info = new StorageDetailInfo();
+            info.setGodownEntryId(godownEntryId);
+            info.setStoreIdInput(item.getLogicStoreId());
+            info.setStoreNameInput(item.getLogicStoreName());
+            info.setCommodityId(item.getCommodityId());
+            info.setCommodityName(item.getCommodityName());
+            info.setCommodityCount(item.getNum());
+            info.setWholesalerHead(wholesalerHead);
+            info.setMotorcadeHead(motorcadeHead);
+            info.setStoreHeadInput(storeHeadInput);
+
+            return info;
+        }).map(item -> {
+            storageDetailInfoRepo.insert(item);
+
+            return item;
+        }).collect(toList());
+
         return ResponseEntity.ok().build();
     }
 
