@@ -138,6 +138,13 @@ public class AjaxController {
         }).map(item -> {
             storageDetailInfoRepo.insert(item);
 
+            InventoryInfo inputInventory = inventoryInfoRepo.findByPk(item.getStoreIdInput(), item.getCommodityId());
+            if (inputInventory != null) {
+                inventoryInfoRepo.increaseCommodityCountByUpdate(item.getStoreIdInput(), item.getCommodityId(), item.getCommodityCount());
+            } else {
+                inventoryInfoRepo.increaseCommodityCountByInsert(item.getStoreIdInput(), item.getCommodityId(), item.getCommodityCount());
+            }
+
             return item;
         }).collect(toList());
 

@@ -51,7 +51,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <label class="control-label" for="storeHouseId">配送点：</label>
+                        <label class="control-label" for="storeHouseId">仓库名：</label>
                         <select class="form-control" id="storeHouseId">
                         <#list storeHouses as storeHouse>
                             <option value="${storeHouse.id}">${storeHouse.name}</option>
@@ -59,7 +59,7 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label class="control-label" for="wholesalerHead">出仓负责人：</label>
+                        <label class="control-label" for="wholesalerHead">批发商负责人：</label>
                         <input class="form-control" id="wholesalerHead" name="wholesalerHead" type="text">&nbsp;&nbsp;
                     </div>
                     <div class="col-md-6">&nbsp;</div>
@@ -73,7 +73,7 @@
                         <input class="form-control" id="motorcadeHead" name="motorcadeHead" type="text">&nbsp;&nbsp;
                     </div>
                     <div class="col-md-3">
-                        <label class="control-label" for="storeHeadInput">入仓负责人：</label>
+                        <label class="control-label" for="storeHeadInput">仓库负责人：</label>
                         <input class="form-control" id="storeHeadInput" name="storeHeadInput" type="text">&nbsp;&nbsp;
                     </div>
                     <div class="col-md-6"></div>
@@ -105,7 +105,7 @@
                     </div>
                     <div class="col-md-2 text-right">
                         <button type="button" id="confirm-delivery" style="margin-top: 25px;"
-                                class="btn btn-success btn-block">确认配送
+                                class="btn btn-success btn-block">确认入库
                         </button>
                     </div>
                 </div>
