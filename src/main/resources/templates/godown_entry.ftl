@@ -73,7 +73,7 @@
                         <input class="form-control" id="motorcadeHead" name="motorcadeHead" type="text">&nbsp;&nbsp;
                     </div>
                     <div class="col-md-3">
-                        <label class="control-label" for="storeHeadInput">入仓负责人：</label>
+                        <label class="control-label" for="storeHeadInput">仓库负责人：</label>
                         <input class="form-control" id="storeHeadInput" name="storeHeadInput" type="text">&nbsp;&nbsp;
                     </div>
                     <div class="col-md-6"></div>
@@ -105,7 +105,7 @@
                     </div>
                     <div class="col-md-2 text-right">
                         <button type="button" id="confirm-delivery" style="margin-top: 25px;"
-                                class="btn btn-success btn-block">确认配送
+                                class="btn btn-success btn-block">确认入库
                         </button>
                     </div>
                 </div>
