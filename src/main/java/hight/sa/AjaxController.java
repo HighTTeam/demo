@@ -134,6 +134,12 @@ public class AjaxController {
             info.setMotorcadeHead(motorcadeHead);
             info.setStoreHeadInput(storeHeadInput);
 
+            int updated = inventoryInfoRepo.increaseCommodityCountByUpdate(info.getStoreIdInput(), item.getCommodityId(), info.getCommodityCount());
+            // 更新数为0时，表示记录不存在，插入新的
+            if (updated == 0) {
+                inventoryInfoRepo.increaseCommodityCountByInsert(info.getStoreIdInput(), item.getCommodityId(), info.getCommodityCount());
+            }
+
             return info;
         }).map(item -> {
             storageDetailInfoRepo.insert(item);

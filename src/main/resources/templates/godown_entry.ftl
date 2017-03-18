@@ -51,7 +51,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <label class="control-label" for="storeHouseId">配送点：</label>
+                        <label class="control-label" for="storeHouseId">仓库名：</label>
                         <select class="form-control" id="storeHouseId">
                         <#list storeHouses as storeHouse>
                             <option value="${storeHouse.id}">${storeHouse.name}</option>
@@ -59,7 +59,7 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label class="control-label" for="wholesalerHead">出仓负责人：</label>
+                        <label class="control-label" for="wholesalerHead">批发商负责人：</label>
                         <input class="form-control" id="wholesalerHead" name="wholesalerHead" type="text">&nbsp;&nbsp;
                     </div>
                     <div class="col-md-6">&nbsp;</div>
