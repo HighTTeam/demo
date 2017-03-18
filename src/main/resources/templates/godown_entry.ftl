@@ -73,7 +73,7 @@
                         <input class="form-control" id="motorcadeHead" name="motorcadeHead" type="text">&nbsp;&nbsp;
                     </div>
                     <div class="col-md-3">
-                        <label class="control-label" for="storeHeadInput">仓库负责人：</label>
+                        <label class="control-label" for="storeHeadInput">入库负责人：</label>
                         <input class="form-control" id="storeHeadInput" name="storeHeadInput" type="text">&nbsp;&nbsp;
                     </div>
                     <div class="col-md-6"></div>
