@@ -1,0 +1,7 @@
+-- auto Generated on 2017-03-19 14:54:27 
+-- DROP TABLE IF EXISTS `role`; 
+CREATE TABLE `role`(
+    `id` BIGINT (15) NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `name` VARCHAR (128) NOT NULL DEFAULT '' COMMENT 'name',
+    PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '`role`';
